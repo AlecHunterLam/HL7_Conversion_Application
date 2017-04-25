@@ -58,15 +58,15 @@ class home(generic.View):
         return render(request, 'HIT_Term_Project/home.html')
     def post(self,request):
         hl7_data = ""
+
         if "hl7_data" in request.POST:
             hl7_data = request.POST["hl7_data"]
             if hl7_data == "":
-                return render(request,"HIT_Term_Project/home.html", {"message":"Empty Field"})
+                return render(request,"HIT_Term_Project/home.html", {"hl7_data":"Empty HL7 Data Field"})
             # PARSE HL7 DATA
-            hl7_data = str(hl7_data)
             dictionary_data = hl7_str_to_dict(hl7_data)
             json_data = json.dumps(dictionary_data)
-            return render(request,"HIT_Term_Project/home.html", {"hl7_data":hl7_data})
+            return render(request,"HIT_Term_Project/home.html", {"hl7_data":json_data})
         else:
             return render(request,"HIT_Term_Project/home.html", {"message":"Empty Field"})
 
