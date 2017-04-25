@@ -1,0 +1,17 @@
+
+{% csrf_token %}
+<form action="{%url 'home' %}" method='post'>
+{% csrf_token %}
+
+<input type="text" name="hl7_data" placeholder="HL7 Input">
+
+
+<button type="submit" name="action" value="Submit">Submit</button>
+
+</form>
+
+<p>hey</p>
+{% if hl7_data %}
+<p>{{ hl7_data }}</p>
+{% endif %}
+    
