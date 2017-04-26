@@ -1,16 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HL7 to JSON</title>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <style type="text/css">
+        * {
+            font-family: 'Titillium Web', sans-serif;
+            width: 90%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color:white;
+        }
+        p {
+            color:white;
+            font-size: 110%;
+        }
+        body {
+            background:
+            linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+            linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+            linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+            linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+            linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+            linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+            background-color: #131313;
+            background-size: 20px 20px;
+        }
 
-{% csrf_token %}
-<form action="{%url 'home' %}" method='post'>
-{% csrf_token %}
+        h1 {
+            font-size: 300%;
+        }
 
-<textarea rows ="10" cols = "50" type="text" name="hl7_data" placeholder="HL7 Input"></textarea>
+        #error {
+            color:red;
+        }
+        textarea {
+            width: 90%;
+            font-size: 120%;
+        }
+        .results {
+            text-align: left;
+            color:black;
+        }
+        form {
+            padding-top: 30px;
+        }
+        .box {
+            background-color: white;
+            box-shadow: 5px 5px 5px #888888;
+            padding: 5px;
+        }
+        ::-webkit-input-placeholder {
+            font-size: 150%;
+        }
+        button { 
+            font-size: 120%; 
+        }
+        footer {
 
+            background-color: white;
+            box-shadow: 4px 4px 4px #888888;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
 
-<button type="submit" name="action" value="Submit">Submit</button>
+<body>
+    {% load static %}
 
-</form>
+    <h1>HL7 to JSON Data Convertor</h1>
 
-{% if hl7_data %}
-<p>{{ hl7_data }}</p>
-{% endif %}
+    <p>This is a basic web application focused on improving interoperability in the Healthcare Information Technology industry. Due to rigid systems among Electronic Medical Record Systems in the healthcare industry, transferring data is difficult and can be time consuming and cost inefficient.</p>
+
+    <p>To address this issue, we developed a web application that allows users to take in raw HL7 data, and outputs the information in a json format. This allows the data to be used by individuals that work in other forms of data storage. The application helps move the healthcare industry a small step forward in improving interoperability among electronic medical record systems.</p>
+
     
+
+    {% csrf_token %}
+    <form action="{%url 'home' %}" method='post'>
+    {% csrf_token %}
+    <h3>Insert HL7 formatted data below, and submit to receive Json formatted data.</h3>
+
+    <textarea rows ="10" cols = "50" type="text" name="hl7_data" placeholder="HL7 Input"></textarea>
+
+    <br/>
+    <button type="submit" name="action" value="Submit">Submit</button>
+
+    </form>
+
+    {% if message %}
+        <h4 id="error">Error:</h4>
+        <p>{{message}}</p>
+    {% endif %}
+
+    {% if hl7_data %}
+    <h3>Input HL7</h3>
+    <div class="box">
+        <p class="results">{{ input_data }}</p>
+    </div>
+    <h3>Output Json</h3>
+    <div class="box">
+        <p class="results">{{ hl7_data }}</p>
+    </div>
+    {% endif %}
+    <br/>
+    <footer>
+        Term Project: <br/>
+        HL7 to JSON Convertor<br/>
+        Alec Lam, Ashvin Niruttan, Akshay Goradia, James Jameson, & Rumby Wilson<br/>
+        Healthcare Information Systems<br/>
+        67-308<br/>
+        Professor Don Taylor<br/>
+    </footer>
+    <br/>
+
+</body>
+</html>
+
+
